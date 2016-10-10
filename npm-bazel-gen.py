@@ -65,7 +65,8 @@ def get_dependencies(name, version):
 	if code in dependency_cache:
 		return dependency_cache[code]
 	print("  -- dependencies: " + code)
-	result_string = subprocess.check_output(['npm', '--registry', registry, 'view', '--json', name+'@'+version, 'dependencies'])
+        cmd = ['npm', '--registry', registry, 'view', '--json', name+'@'+version, 'dependencies']	
+	result_string = subprocess.check_output(cmd).strip()
 	if not result_string:
 		output = {}
 	else:
